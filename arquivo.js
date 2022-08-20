@@ -1,4 +1,3 @@
-
 const inputNome    = document.querySelector('#nome')
 const inputEmail   = document.querySelector('#email')
 const inputCelular = document.querySelector('#celular')
@@ -7,16 +6,16 @@ const botaoLimpar  = document.querySelector('#limpar')
 const botaoExcluir = document.getElementsByClassName('btn btn-danger btn-sm')
 const botaoEditar  = document.getElementsByClassName('btn btn-secondary btn-sm')
 
-function limpar(){
+
+function limpar() {
   inputNome.value    = ""
   inputEmail.value   = ""
   inputCelular.value = ""
-}
+} 
 botaoLimpar.addEventListener("click", limpar)
 
 
-
-function criar(){
+function criar() {
   const tbody = document.querySelector("#tabela")
     for(let i = 0; i<1; i++){
       const tr           = document.createElement("tr")
@@ -40,10 +39,10 @@ function criar(){
 
       botaoEditar.className  = "btn btn-secondary btn-sm"
       botaoExcluir.className = "btn btn-danger btn-sm"
-
+      
       botaoEditar.id  = "editar"
       botaoExcluir.id = "excluir"
-       
+      
       botaoEditar.innerText  = "Editar"
       botaoExcluir.innerText = "Excluir"
        
@@ -51,17 +50,21 @@ function criar(){
       tr.append(tdNome, tdEmail, tdTel, tdBotoes)
       tbody.appendChild(tr)
     }
-    return tbody
+  return tbody
 }
-    
+  
 function salvar(){
   criar()
   editar()
   excluir()
+  if(controleEditar == 1){
+    dado.remove()
+    controleEditar = 0
+  }
 }
 botaoSalvar.addEventListener("click", salvar)
-
-
+  
+  
 function btnExcluir(event){
   const dado = event.target.parentElement.parentElement
   dado.remove()
@@ -73,16 +76,17 @@ function excluir(){
 }
 excluir()
 
+
 function btnEditar(event){
-  const dado         = event.target.parentElement.parentElement
+  dado               = event.target.parentElement.parentElement
   const nome         = dado.firstElementChild
   const email        = nome.nextElementSibling
   const celular      = email.nextElementSibling
   inputNome.value    = nome.innerText
   inputEmail.value   = email.innerText
   inputCelular.value = celular.innerText
-
-  dado.remove()
+  
+  controleEditar = 1
 }
 function editar(){
   for(let i = 0; i < botaoEditar.length; i++) {
